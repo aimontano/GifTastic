@@ -53,6 +53,15 @@ const getImages = (query) => {
 	});
 }
 
+const displayButton = (text) => {
+	let div = $('<div>').addClass('col-md');
+	let btn = $('<button>').addClass('btn btn-success mb-2 btn-block');
+	btn.attr('data-city', text);
+	btn.text(text);
+	div.append(btn);
+	$('#buttons').append(div);
+}
+
 // button click handler
 $(document).on('click', '#buttons .btn', function(){
 	let city = $(this).attr('data-city');
@@ -69,4 +78,16 @@ $(document).on('click', 'img', function(){
 		$(this).attr('src', $(this).attr('data-still'));
 		$(this).attr('data-state', 'still');
 	}
+});
+
+// handle add city btn click
+$('#addBtn').click(function(e){
+	e.preventDefault();
+	let userInput = $('#addInput').val().trim();
+	if(userInput != '') 
+		displayButton(userInput);
+	else 
+		alert("You must enter a correct city");
+
+	$('#addInput').val(' ');
 });
