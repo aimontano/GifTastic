@@ -2,27 +2,27 @@
 // takes an array parameter = ajax response
 const displayImages = (arr) => {
 	$('#result').empty();
-	let imageURL; // location for still image
+	let stillImage; // location for still image
 	let movingImage; // location of gif
 
 	let div = $('<div>').addClass('row');
 
 	arr.forEach(function(i){
-		imageURL = i.images['480w_still'].url;
+		stillImage = i.images['480w_still'].url;
 		movingImage = i.images.preview_gif.url;
 
 		let rating = i.rating.toUpperCase();
 
 		let column = $('<div>').addClass('col-md-3 mb-3');
 		let card = $('<div>').addClass('card');
-		let img = $('<img>').attr('src', movingImage);
+		let img = $('<img>').attr('src', stillImage);
 		let cardBody = $('<div>').addClass('card-body text-center');
 		let cardTitle = $('<h5>').text("Raging: " + rating);
 
 		img.css('width', '100%');
 
-		img.attr('data-status', 'still');
-		img.attr('data-still', imageURL);
+		img.attr('data-state', 'still');
+		img.attr('data-still', stillImage);
 		img.attr('data-moving', movingImage);
 
 		cardBody.append(cardTitle);
@@ -53,8 +53,20 @@ const getImages = (query) => {
 	});
 }
 
+// button click handler
 $(document).on('click', '#buttons .btn', function(){
 	let city = $(this).attr('data-city');
 	getImages(city);
 });
 
+// image click handler
+$(document).on('click', 'img', function(){
+	let imgState = $(this).attr('data-state');
+	if(imgState === 'still') {
+		$(this).attr('src', $(this).attr('data-moving'));
+		$(this).attr('data-state', 'moving');
+	} else {
+		$(this).attr('src', $(this).attr('data-still'));
+		$(this).attr('data-state', 'still');
+	}
+});
