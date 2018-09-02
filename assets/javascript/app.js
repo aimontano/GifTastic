@@ -25,7 +25,7 @@ const displayImages = (arr) => {
 		img.attr('data-state', 'still'); // add attribute of data-state of still
 		img.attr('data-still', stillImage); // add attribute of data-still with stillImage link 
 		img.attr('data-moving', movingImage); // add attribute of data-moving with movingImage link
- 
+
 		cardBody.append(cardTitle); // append card title to card body
 		card.append(img); // append img to the card element
 		card.append(cardBody);	// append cardBody to card element
@@ -59,7 +59,7 @@ const displayButton = (text) => {
 	let div = $('<div>').addClass('col-md'); // create new div with class of col-md
 	// create button element with the following classes: btn btn-success mb-2 btn-block
 	let btn = $('<button>').addClass('btn btn-success mb-2 btn-block'); 
-	btn.attr('data-city', text); // give button attribute of data-city with value = user input (text)
+	btn.attr('data-animal', text); // give button attribute of data-city with value = user input (text)
 	btn.text(text); // set the text of button = user input (text)
 	div.append(btn); // append button to div
 	$('#buttons').append(div); // display button to user
@@ -67,8 +67,8 @@ const displayButton = (text) => {
 
 // button click handler
 $(document).on('click', '#buttons .btn', function(){
-	let city = $(this).attr('data-city'); // stores the clicked button data-city value
-	getImages(city); // call getImages function and passes the city value 
+	let animal = $(this).attr("data-animal"); // stores the clicked button data-city value
+	getImages(animal); // call getImages function and passes the city value 
 });
 
 // image click handler
